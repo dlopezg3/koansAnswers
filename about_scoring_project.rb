@@ -32,49 +32,33 @@ require "byebug"
 
 def score(dice)
   # You need to write this method
-  count = contador(dice)
+  one = dice.select {|i| i == 1 }.size
+  two = dice.select {|i| i == 2 }.size
+  three = dice.select {|i| i == 3 }.size
+  four = dice.select {|i| i == 4 }.size
+  five = dice.select {|i| i == 5 }.size
+  six = dice.select {|i| i == 6 }.size
+
   score = 0
-  if count[:one] >= 3
-    score += 1000 + ((count[:one] - 3) * 100)
-  elsif count[:one] < 3
-    score += 100 * count[:one]
+
+  if one >= 3
+    score += 1000 + ((one - 3) * 100)
+  elsif one < 3
+    score += 100 * one
   end
 
-  if count[:five] >= 3
-    score += 500 + ((count[:five] - 3) * 50)
-  elsif count[:five] < 3
-    score += 50 * count[:five]
+  if five >= 3
+    score += 500 + ((five - 3) * 50)
+  elsif five < 3
+    score += 50 * five
   end
 
-  score += 200 if count[:two] >= 3
-  score += 300 if count[:three] >= 3
-  score += 400 if count[:four] >= 3
-  score += 600 if count[:six] >= 3
+  score += 200 if two >= 3
+  score += 300 if three >= 3
+  score += 400 if four >= 3
+  score += 600 if six >= 3
 
   return score
-end
-
-def contador(dice)
-  cont = { one:  0, two: 0, three: 0, four: 0, five: 0, six: 0 }
-  dice.each do |i|
-    case i
-      when 1
-        cont[:one] += 1
-      when 2
-        cont[:two] += 1
-      when 3
-       cont[:three] += 1
-      when 4
-       cont[:four] += 1
-      when 5
-       cont[:five] += 1
-      when 6
-       cont[:six] += 1
-      else
-        puts "Wrong input"
-    end
-  end
-  cont
 end
 
 
